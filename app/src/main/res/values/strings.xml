@@ -12,6 +12,7 @@
     <string name="height">Height [{}]:</string>
     <string name="cm">cm</string>
     <string name="in">in</string>
+    <string name="val_is_zero">value cannot be zero</string>
     <string name="go_back">go Back</string>
     <string name="underweight">underweigth</string>
     <string name="normal">normal</string>
