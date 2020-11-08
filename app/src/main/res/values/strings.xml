@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="units">Change units</string>
+    <string name="mass">Mass [{}]:</string>
+    <string name="kg">kg</string>
+    <string name="pounds">Ib</string>
+    <string name="count_bmi">Count BMI</string>
+    <string name="empty_value">0.00</string>
+    <string name="height_is_empty">Please provide value.</string>
+    <string name="mass_is_empty">Please provide value.</string>
+    <string name="not_in_range">Value must be a number between {} and {}.</string>
+    <string name="height">Height [{}]:</string>
+    <string name="cm">cm</string>
+    <string name="in">in</string>
+    <string name="go_back">go Back</string>
+    <string name="underweight">underweigth</string>
+    <string name="normal">normal</string>
+    <string name="overweight">overweight</string>
+    <string name="obese">obese</string>
+</resources>

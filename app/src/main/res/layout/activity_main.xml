@@ -1,0 +1,78 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/massTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/TV_margin_right"
+        android:layout_marginBottom="@dimen/TV_margin_bottom"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/massET"
+        app:layout_constraintStart_toStartOf="@+id/massET" />
+
+    <EditText
+        android:id="@+id/massET"
+        android:layout_width="@dimen/ET_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ET_margin_top"
+        android:layout_marginEnd="@dimen/margin"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/heightET"
+        android:layout_width="@dimen/ET_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ET_margin_top"
+        android:layout_marginStart="@dimen/margin"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/massET"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/heightTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/TV_margin_right"
+        android:layout_marginBottom="@dimen/TV_margin_bottom"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/heightET"
+        app:layout_constraintStart_toStartOf="@+id/heightET" />
+
+    <Button
+        android:id="@+id/countBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/bmi_margin_top"
+        android:onClick="count"
+        android:text="@string/count_bmi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bmiTV" />
+
+    <TextView
+        android:id="@+id/bmiTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:onClick="openInfo"
+        android:text="@string/empty_value"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="@+id/countBTN"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/countBTN"
+        app:layout_constraintTop_toBottomOf="@+id/massET" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
