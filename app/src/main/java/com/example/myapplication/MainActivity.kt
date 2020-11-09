@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
 
             if (heightET.text.isBlank()) heightET.error = getError(R.string.height_is_empty)
             else if (height == null) heightET.error = getError(R.string.not_in_range).interpolate(1.0, getMaxHeight())
-            else if (height !in 0.0..getMaxHeight()) heightET.error = getError(R.string.not_in_range).interpolate(0.0, getMaxHeight())
+            else if (height !in 1.0..getMaxHeight()) heightET.error = getError(R.string.not_in_range).interpolate(1.0, getMaxHeight())
 
             if (massET.text.isBlank()) massET.error = getError(R.string.mass_is_empty)
             else if (mass == null) massET.error = getError(R.string.not_in_range).interpolate(0.0, getMaxMass())
