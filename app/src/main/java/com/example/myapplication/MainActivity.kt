@@ -2,29 +2,20 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.util.Log.INFO
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.annotation.RequiresApi
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.ActivityMainBinding.inflate
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.*
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.*
-import java.util.logging.Level.INFO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 const val BMIKEY = "bmi"
-const val PREFERENCES = "sadsadfsdfsd"
 class MainActivity : AppCompatActivity() {
 
     private val imperialCalc = ImperialBMICalc()
@@ -33,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     private val SAVE_MASS = "mass"
     private val SAVE_HEIGHT = "height"
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: EntryCacheViewModel by viewModels {
+        WordViewModelFactory((application as BMIApplication).repository, resources)
+    }
 
     private fun getMaxMass() = if(bmiCalc is MetricBMICalc) 300.0 else 300 * 2.20462262
     private fun getMaxHeight() = if(bmiCalc is MetricBMICalc) 240.0 else 240 * 0.45359237
@@ -59,11 +53,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             val isMetric = bmiCalc is MetricBMICalc
-            convertET(if (isMetric) Units.Imperial else Units.Metric)
+            convertET(if (bmiCalc is MetricBMICalc) Units.Imperial else Units.Metric)
             bmiCalc = if (isMetric) imperialCalc else metricCalc
             setTV()
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -141,9 +136,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addToCache(bmi : Double, height: Double, mass: Double) : Unit {
-        val (heightText, massText) = getValuesWithUnits()
-        val entry = BMIEntry(heightText, massText, height, mass, bmi)
-        EntryCache.addEntry(entry, getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE))
+        val units = if (bmiCalc is MetricBMICalc) Units.Metric  else Units.Imperial
+        GlobalScope.launch {  viewModel.addEntry(units,  height, mass, bmi) }
     }
 
     fun openInfo(view: View) {
