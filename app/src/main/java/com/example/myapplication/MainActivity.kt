@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addToCache(bmi : Double, height: Double, mass: Double) : Unit {
         val units = if (bmiCalc is MetricBMICalc) Units.Metric  else Units.Imperial
-        GlobalScope.launch {  viewModel.addEntry(units,  height, mass, bmi) }
+        viewModel.addEntry(units,  height, mass, bmi)
     }
 
     fun openInfo(view: View) {

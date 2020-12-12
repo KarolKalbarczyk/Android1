@@ -39,17 +39,19 @@ class EntryCacheViewModel(private val repository: BMIEntryRepository, private va
             date = entity.date
         )
 
-    suspend fun addEntry(units: Units,
+    fun addEntry(units: Units,
                  height: Double,
                  mass: Double,
                  bmi: Double,
                  date: Date = Date()
     ): Unit {
-        val list = repository.allEntries.first()
-        if (list.size == numberOfEntries)
-            viewModelScope.launch {  repository.delete(list[0]) }
-        val newEntity = BMIEntry(0, height, mass, bmi, date, units)
-        viewModelScope.launch { repository.insert(newEntity) }
+        viewModelScope.launch {
+            val list = repository.allEntries.first()
+            if (list.size == numberOfEntries)
+                viewModelScope.launch {  repository.delete(list[0]) }
+            val newEntity = BMIEntry(0, height, mass, bmi, date, units)
+            repository.insert(newEntity)
+        }
     }
 }
 
