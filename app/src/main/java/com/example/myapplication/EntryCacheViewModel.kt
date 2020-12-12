@@ -48,7 +48,7 @@ class EntryCacheViewModel(private val repository: BMIEntryRepository, private va
         viewModelScope.launch {
             val list = repository.allEntries.first()
             if (list.size == numberOfEntries)
-                viewModelScope.launch {  repository.delete(list[0]) }
+                repository.delete(list[0])
             val newEntity = BMIEntry(0, height, mass, bmi, date, units)
             repository.insert(newEntity)
         }
